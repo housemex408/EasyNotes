@@ -14,8 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var request = require('request');
-var jsonQuery = require('json-query');
+var Client = require('node-rest-client').Client;
 
 module.exports = {
 
@@ -27,34 +26,34 @@ module.exports = {
     notes: function (req, res) {
 
         var version = "Docket_3.0.0";
-        var stories;
+        var stories = [];
 
-        var options = {
-            url: 'http://jira/rest/api/2/search/',
-//           auth: {
-//                'user': 'jalvarado',
-//                'pass': 'Mam80samba'
-//            },*/
-            //qs: "fixVersion='" + version + "' AND project=ETOOLS ORDER BY Key"
-            qs: "fixVersion='Docket_3.0.0' AND project=ETOOLS ORDER BY Key"
-        }
+        var client = new Client();
 
-        function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var info = JSON.parse(body)
-                console.log("i got in here!")
-
-                stories = jsonQuery("fields[][description='Story']", {
-                    rootContext: info
-                })
+        var args ={
+            parameters:{
+                jql:"fixVersion='" + version + "' AND project=ETOOLS ORDER BY Key"
             }
-        }
+        };
 
-        request(options, callback);
+        // registering remote methods
+        client.registerMethod("search", "http://jira/rest/api/2/search", "GET");
 
-        return res.view({
-            notes: stories
-        })
+        client.methods.search(args, function (data, response) {
+            var issues  = JSON.parse(data).issues;
+
+            issues.forEach(function(issue)
+            {
+                if (issue.fields.issuetype.name == 'Story')
+                    stories.push(issue);
+            });
+
+            //console.log(stories);
+
+            return res.view({
+                notes: stories
+            })
+        });
     },
 
 
