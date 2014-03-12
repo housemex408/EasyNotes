@@ -1,0 +1,9 @@
+//http://naltatis.github.io/jade-syntax-docs/
+html
+    head
+        title Release Notes Using Jade
+body
+    fieldset
+        ul
+            for note in notes
+                li= note.fields.summary
