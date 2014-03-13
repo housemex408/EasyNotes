@@ -10,6 +10,16 @@
 
 module.exports.bootstrap = function (cb) {
 
+    // Development environment
+    if (sails.config.environment === 'development') {
+
+        console.log('development --------');
+        var app = sails.express.app;
+        app.set('view options', { pretty:true });
+        app.locals.pretty = true;
+
+    }
+
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();

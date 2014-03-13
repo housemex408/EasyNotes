@@ -26,8 +26,6 @@ module.exports = {
     notes: function (req, res) {
 
         var version = "Docket_3.0.0";
-        var stories = [];
-
         var client = new Client();
 
         var args ={
@@ -36,11 +34,11 @@ module.exports = {
             }
         };
 
-        // registering remote methods
         client.registerMethod("search", "http://jira/rest/api/2/search", "GET");
 
         client.methods.search(args, function (data, response) {
             var issues  = JSON.parse(data).issues;
+            var stories = [];
 
             issues.forEach(function(issue)
             {
