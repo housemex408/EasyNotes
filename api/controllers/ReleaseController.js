@@ -36,7 +36,7 @@ module.exports = {
 
         client.registerMethod("search", "http://jira/rest/api/2/search", "GET");
 
-        client.methods.search(args, function (data, response) {
+        client.methods.search(args, function (data, response, version) {
             var issues  = JSON.parse(data).issues;
             var stories = [];
 
@@ -49,7 +49,8 @@ module.exports = {
             //console.log(stories);
 
             return res.view({
-                notes: stories
+                notes: stories,
+                version: version
             })
         });
     },
