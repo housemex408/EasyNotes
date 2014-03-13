@@ -2,3 +2,8 @@ ul.issues li a
 {
     margin-right: 8px;
 }
+
+ul.issues li
+{
+  list-style: none;
+}

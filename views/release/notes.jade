@@ -12,17 +12,17 @@ block content
             ul.issues
                 for story in stories
                     li
-                        a(href=story.self)= '[' + story.key + ']'
+                        a(href='http://jira/browse/' + story.key, target='new')= '[' + story.key + ']'
                         span= story.fields.summary
             h3 Chores
             ul.issues
                 for chore in chores
                     li
-                        a(href=chore.self)= '[' + chore.key + ']'
+                        a(href='http://jira/browse/' + chore.key, target='new')= '[' + chore.key + ']'
                         span= chore.fields.summary
             h3 Bugs
             ul.issues
                 for bug in bugs
                     li
-                        a(href=bug.self)= '[' + bug.key + ']'
+                        a(href='http://jira/browse/' + bug.key, target='new')= '[' + bug.key + ']'
                         span= bug.fields.summary
