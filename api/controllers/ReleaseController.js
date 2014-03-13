@@ -23,10 +23,7 @@ module.exports = {
      *    `/release/notes`
      */
     notes: function (req, res) {
-
-        var version = "Docket_3.0.0";
-
-        ReleaseNotes.getNotes(res, version);
+        ReleaseNotes.getNotes(res, req.param('rel'));
     },
 
 
@@ -35,6 +32,4 @@ module.exports = {
      * (specific to ReleaseController)
      */
     _config: {}
-
-
 };

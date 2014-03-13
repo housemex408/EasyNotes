@@ -9,14 +9,20 @@ block content
             div.starter-template
                 h2= version
             h3 Stories
-            ul
+            ul.issues
                 for story in stories
-                    li= story.fields.summary
+                    li
+                        a(href=story.self)= '[' + story.key + ']'
+                        span= story.fields.summary
             h3 Chores
-            ul
+            ul.issues
                 for chore in chores
-                    li= chore.fields.summary
+                    li
+                        a(href=chore.self)= '[' + chore.key + ']'
+                        span= chore.fields.summary
             h3 Bugs
-            ul
+            ul.issues
                 for bug in bugs
-                    li= bug.fields.summary
+                    li
+                        a(href=bug.self)= '[' + bug.key + ']'
+                        span= bug.fields.summary
