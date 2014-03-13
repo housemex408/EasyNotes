@@ -14,7 +14,6 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var Client = require('node-rest-client').Client;
 
 module.exports = {
 
@@ -26,34 +25,8 @@ module.exports = {
     notes: function (req, res) {
 
         var version = "Docket_3.0.0";
-        var client = new Client();
 
-        var args ={
-            parameters:{
-                jql:"fixVersion='" + version + "' AND project=ETOOLS ORDER BY Key"
-            }
-        };
-
-        client.registerMethod("search", "http://jira/rest/api/2/search", "GET");
-
-        client.methods.search(args, function (data, response) {
-            var issues  = JSON.parse(data).issues;
-            var stories = [];
-
-            issues.forEach(function(issue)
-            {
-                if (issue.fields.issuetype.name == 'Story')
-                    stories.push(issue);
-            });
-
-            //console.log(stories);
-
-            return res.view({
-                notes: stories,
-                version: version
-            })
-        });
-
+        ReleaseNotes.getNotes(res, version);
     },
 
 

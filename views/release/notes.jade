@@ -8,7 +8,15 @@ block content
         div.container
             div.starter-template
                 h2= version
-            fieldset
-                ul
-                    for note in notes
-                        li= note.fields.summary
+            h3 Stories
+            ul
+                for story in stories
+                    li= story.fields.summary
+            h3 Chores
+            ul
+                for chore in chores
+                    li= chore.fields.summary
+            h3 Bugs
+            ul
+                for bug in bugs
+                    li= bug.fields.summary
