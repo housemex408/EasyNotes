@@ -10,21 +10,22 @@
 
 module.exports.bootstrap = function (cb) {
 
-    // Development environment
+    // Development environment bootstrap
     if (sails.config.environment === 'development') {
 
         console.log('development --------');
         var app = sails.express.app;
         app.set('view options', { pretty: true });
         app.locals.pretty = true;
-
     }
 
+    // Enable Nodetime App Monitoring
     require('nodetime').profile({
         accountKey: 'b9aef701f5dfc802f664aec698b30203457ceaba',
         appName: 'EZ Notes'
     });
 
+    // Create Logging directory
     var mkdirp = require('mkdirp')
         , logDir = sails.config.app.logDir;
 
@@ -32,6 +33,14 @@ module.exports.bootstrap = function (cb) {
         if (err) console.error(err)
         else console.log("Log directory created successfully.");
     });
+
+    // Set logger as a global
+    var fs = require('fs')
+        , Log = require('log')
+        , logDir = sails.config.app.logDir
+        , log = new Log('debug', fs.createWriteStream(logDir + '/releaseNotes.log'));
+
+    sails.config.app.logger = log;
 
     // It's very important to trigger this callack method when you are finished
     // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -1,12 +1,3 @@
-var log;
-
 exports.get = function () {
-    var fs = require('fs')
-        , Log = require('log')
-        , logDir = sails.config.app.logDir;
-
-    if(log == null || log == undefined)
-        log = new Log('debug', fs.createWriteStream(logDir + '/releaseNotes.log'));
-
-    return log;
+    return sails.config.app.logger;
 };
