@@ -11,5 +11,5 @@ block content
             ul.issues
                 for project in projects
                     li
-                        a(href='')= '[' + project.key + ']'
+                        a(href='/projects/' + project.key)= '[' + project.key + ']'
                         span= project.name

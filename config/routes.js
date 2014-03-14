@@ -64,7 +64,7 @@ module.exports.routes = {
     '/projects/:project/:version': {
         controller: 'ReleaseController',
         action: 'notes'
-    },
+    }
 
     /*
      // If you decided to call your action `index` instead of `inbox`,

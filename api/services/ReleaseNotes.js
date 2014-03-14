@@ -8,7 +8,12 @@ client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
 client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
 client.registerMethod("versions", "http://jira/rest/api/2/project/${project}/versions", "GET");
 
+var LogLibrary = require('./Logger');
+
 exports.getProjects = function (res) {
+    var logger = LogLibrary.get();
+    logger.debug("entering ReleaseNotes.getProjects()");
+
     var args = {}
 
     client.methods.projects(args, function (data, response) {
@@ -38,8 +43,7 @@ exports.getVersions = function (res, project) {
         var results = [];
 
         versions.forEach(function (version) {
-            if (version.released == true)
-            {
+            if (version.released == true) {
                 results.push({
                     releaseDate: version.releaseDate,
                     name: version.name,

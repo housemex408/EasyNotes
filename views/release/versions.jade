@@ -11,5 +11,5 @@ block content
             ul.issues
                 for version in versions
                     li
-                        a(href='')= '[' + version.name + ']'
+                        a(href='/projects/' + project + '/' + version.name)= '[' + version.name + ']'
                         span= version.description

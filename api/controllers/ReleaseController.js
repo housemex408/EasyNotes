@@ -17,7 +17,6 @@
 
 module.exports = {
 
-
     /**
      * Action blueprints:
      *    `/release/notes`
