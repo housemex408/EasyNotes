@@ -6,9 +6,9 @@ var Client = require('node-rest-client').Client;
 var client = new Client();
 client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
 client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
-client.registerMethod("versions", "http://jira/rest/api/2/project/ETOOLS/versions", "GET");
+client.registerMethod("versions", "http://jira/rest/api/2/project/${project}/versions", "GET");
 
-exports.projects = function (res) {
+exports.getProjects = function (res) {
     var args = {}
 
     client.methods.projects(args, function (data, response) {
@@ -28,10 +28,38 @@ exports.projects = function (res) {
     });
 };
 
-exports.getNotes = function (res, version) {
+exports.getVersions = function (res, project) {
+    var args = {
+        path: {'project': project}
+    };
+
+    client.methods.versions(args, function (data, response) {
+        var versions = JSON.parse(data);
+        var results = [];
+
+        versions.forEach(function (version) {
+            if (version.released == true)
+            {
+                results.push({
+                    releaseDate: version.releaseDate,
+                    name: version.name,
+                    description: version.description
+                });
+            }
+        });
+
+        return res.view({
+            versions: results,
+            project: project
+        })
+    });
+};
+
+
+exports.getNotes = function (res, project, version) {
     var args = {
         parameters: {
-            jql: "fixVersion='" + version + "' AND project=ETOOLS ORDER BY Key"
+            jql: "fixVersion='" + version + "' AND project='" + project + "' ORDER BY Key"
         }
     };
 

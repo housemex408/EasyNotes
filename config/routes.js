@@ -53,15 +53,18 @@ module.exports.routes = {
      */
 
     // Alternatively, you can use the more verbose syntax:
-    '/': {
+    '/projects': {
         controller: 'ReleaseController',
         action: 'projects'
     },
-
-    '/release/notes/:version': {
+    '/projects/:project': {
+        controller: 'ReleaseController',
+        action: 'versions'
+    },
+    '/projects/:project/:version': {
         controller: 'ReleaseController',
         action: 'notes'
-    }
+    },
 
     /*
      // If you decided to call your action `index` instead of `inbox`,

@@ -24,7 +24,8 @@ module.exports = {
      */
     notes: function (req, res) {
         var version = req.param('version');
-        ReleaseNotes.getNotes(res, version);
+        var project = req.param('project');
+        ReleaseNotes.getNotes(res, project, version);
     },
 
     /**
@@ -32,7 +33,16 @@ module.exports = {
      *    `/release/projects`
      */
     projects: function (req, res) {
-        ReleaseNotes.projects(res);
+        ReleaseNotes.getProjects(res);
+    },
+
+    /**
+     * Action blueprints:
+     *    `/release/versions`
+     */
+    versions: function (req, res) {
+        var project = req.param('project');
+        ReleaseNotes.getVersions(res, project);
     },
 
 
