@@ -32,10 +32,11 @@ module.exports.routes = {
   // located at `views/home/index.ejs`
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
+  /*
   '/': {
     view: 'home/index'
   }
-
+*/
   /*
   // But what if you want your home page to display
   // a signup form located at `views/user/signup.ejs`?
@@ -49,15 +50,15 @@ module.exports.routes = {
   // In this scenario, you have a custom controller `MessageController`
   // with an `inbox` action.
   '/': 'MessageController.inbox'
-
+*/
 
   // Alternatively, you can use the more verbose syntax:
   '/': {
-    controller: 'MessageController',
-    action: 'inbox'
+    controller: 'ReleaseController',
+    action: 'projects'
   }
 
-
+/*
   // If you decided to call your action `index` instead of `inbox`,
   // since the `index` action is the default, you can shortcut even further to:
   '/': 'MessageController'

@@ -4,7 +4,29 @@
 // ReleaseNotes.js - in api/services
 var Client = require('node-rest-client').Client;
 var client = new Client();
-client.registerMethod("search", "http://jira/rest/api/2/search", "GET");
+client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
+client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
+client.registerMethod("versions", "http://jira/rest/api/2/project/ETOOLS/versions", "GET");
+
+exports.projects = function (res) {
+    var args = {}
+
+    client.methods.projects(args, function (data, response) {
+        var projects = JSON.parse(data);
+        var results = [];
+
+        projects.forEach(function (project) {
+            results.push({
+                key: project.key,
+                name: project.name
+            });
+        });
+
+        return res.view({
+            projects: results
+        })
+    });
+};
 
 exports.getNotes = function (res, version) {
     var args = {
@@ -13,7 +35,7 @@ exports.getNotes = function (res, version) {
         }
     };
 
-    client.methods.search(args, function (data, response) {
+    client.methods.notes(args, function (data, response) {
         var issues = JSON.parse(data).issues;
         var stories = [];
         var chores = [];

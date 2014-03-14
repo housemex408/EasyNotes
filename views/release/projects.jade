@@ -1,0 +1,15 @@
+//http://naltatis.github.io/jade-syntax-docs/
+extends ../layout
+block content
+    div(class='navbar navbar-inverse navbar-fixed-top', role='navigation')
+        div.container
+            div.navbar-header
+    div.jumbotron
+        div.container
+            div.starter-template
+                h2 Move Projects & Products
+            ul.issues
+                for project in projects
+                    li
+                        a(href='')= '[' + project.key + ']'
+                        span= project.name

@@ -20,6 +20,11 @@ module.exports.bootstrap = function (cb) {
 
     }
 
+    require('nodetime').profile({
+        accountKey: 'b9aef701f5dfc802f664aec698b30203457ceaba',
+        appName: 'EZ Notes'
+    });
+
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();

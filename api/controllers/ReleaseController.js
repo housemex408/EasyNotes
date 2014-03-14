@@ -26,6 +26,14 @@ module.exports = {
         ReleaseNotes.getNotes(res, req.param('rel'));
     },
 
+    /**
+     * Action blueprints:
+     *    `/release/projects`
+     */
+    projects: function (req, res) {
+        ReleaseNotes.projects(res);
+    },
+
 
     /**
      * Overrides for the settings in `config/controllers.js`
