@@ -23,7 +23,8 @@ module.exports = {
      *    `/release/notes`
      */
     notes: function (req, res) {
-        ReleaseNotes.getNotes(res, req.param('rel'));
+        var version = req.param('version');
+        ReleaseNotes.getNotes(res, version);
     },
 
     /**
