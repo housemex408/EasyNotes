@@ -95,3 +95,21 @@ exports.getNotes = function (res, project, version) {
         })
     });
 };
+
+exports.update = function (res, project, version, description) {
+    var logger = LogLibrary.get();
+
+    Release.create({
+        description: description,
+        project: project,
+        version: version
+    }).done(function (err, release) {
+        if (err) {
+            return logger.error(err);
+
+        } else {
+            logger.info("Release updated: ", release);
+            res.json(release);
+        }
+    });
+};

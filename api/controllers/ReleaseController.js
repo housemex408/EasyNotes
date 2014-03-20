@@ -44,6 +44,13 @@ module.exports = {
         ReleaseNotes.getVersions(res, project);
     },
 
+    update: function (req, res) {
+        var description = req.param('description');
+        var version = req.param('version');
+        var project = req.param('project');
+        ReleaseNotes.update(res, project, version, description);
+    },
+
 
     /**
      * Overrides for the settings in `config/controllers.js`

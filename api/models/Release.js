@@ -9,11 +9,9 @@
 module.exports = {
 
   attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    
+    project: 'string',
+    version: 'string',
+    description: 'string'
   }
 
 };

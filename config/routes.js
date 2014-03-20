@@ -64,6 +64,10 @@ module.exports.routes = {
     '/projects/:project/:version': {
         controller: 'ReleaseController',
         action: 'notes'
+    },
+    '/projects/:project/:version/update': {
+        controller: 'ReleaseController',
+        action: 'update'
     }
 
     /*
