@@ -12,11 +12,11 @@ var LogLibrary = require('./Logger');
 
 exports.getProjects = function (res) {
     var logger = LogLibrary.get();
-    logger.debug("entering ReleaseNotes.getProjects()");
+    logger.info("entering ReleaseNotes.getProjects()");
 
-    var args = {}
+    var args = {};
 
-    client.methods.projects(args, function (data, response) {
+    client.methods.projects(args, function (data) {
         var projects = JSON.parse(data);
         var results = [];
 
@@ -38,7 +38,7 @@ exports.getVersions = function (res, project) {
         path: {'project': project}
     };
 
-    client.methods.versions(args, function (data, response) {
+    client.methods.versions(args, function (data) {
         var versions = JSON.parse(data);
         var results = [];
 
@@ -61,14 +61,20 @@ exports.getVersions = function (res, project) {
 
 
 exports.getNotes = function (res, project, version) {
+    var logger = LogLibrary.get();
+
     var args = {
         parameters: {
-            jql: "fixVersion='" + version + "' AND project='" + project + "' ORDER BY Key"
+            jql: "fixVersion='" + version + "' AND project='" + project + "' ORDER BY Key",
+            fields: "issuetype,summary"
         }
     };
 
-    client.methods.notes(args, function (data, response) {
+    client.methods.notes(args, function (data) {
         var issues = JSON.parse(data).issues;
+        logger.info("entering ReleaseNotes.getNotes()");
+        logger.debug(issues);
+
         var stories = [];
         var chores = [];
         var bugs = [];
@@ -109,7 +115,7 @@ exports.update = function (res, project, version, description) {
 
         } else {
             logger.info("Release updated: ", release);
-            res.json(release);
+            return res.json(release);
         }
     });
 };
