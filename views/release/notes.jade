@@ -8,7 +8,9 @@ block content
         div.container
             div.starter-template
                 h2= version
-            div.editable Add additional notes here or include a link to a wiki page!
+            div.spa
+                div.editable(ng-app="EazyNotes", ng-controller="UpdateController") Add additional notes here or include a link to a wiki page!
+                button.right(ng-click="updateNotes()") Save
             h3 Stories
             ul.issues
                 for story in stories
