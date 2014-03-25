@@ -101,3 +101,11 @@ eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $loc
         $scope.bugs =  data.bugs;
     });
 });
+
+eazyNotes.controller("UpdateController", function ($scope, EasyNotesService, $location, $routeParams) {
+    console.log("inside update controller!");
+    $scope.updateNotes = function()
+    {
+        console.log("updating notes!: " + $scope.notes);
+    }
+});
