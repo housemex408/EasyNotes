@@ -45,10 +45,12 @@ module.exports = {
     },
 
     update: function (req, res) {
-        var description = req.param('description');
+        var content = req.param('content');
         var version = req.param('version');
         var project = req.param('project');
-        ReleaseNotes.update(res, project, version, description);
+        var contentId = req.param('contentId');
+        var pageId = req.param('pageId');
+        ReleaseNotes.update(res, project, version, content, contentId, pageId);
     },
 
 

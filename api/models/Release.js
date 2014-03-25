@@ -11,7 +11,9 @@ module.exports = {
   attributes: {
     project: 'string',
     version: 'string',
-    description: 'string'
+    content: 'string',
+    contentid: 'string',
+    pageid: 'string'
   }
 
 };

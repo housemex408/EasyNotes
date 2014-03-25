@@ -32,37 +32,43 @@ html(lang="en")
 
                 Aloha.require( ['aloha', 'aloha/jquery'], function( Aloha, jQuery) {
 
-                // save all changes after leaving an editable
-                Aloha.bind('aloha-editable-deactivated', function(){
-                    var content = Aloha.activeEditable.getContents();
-                    var contentId = Aloha.activeEditable.obj[0].id;
-                    var pageId = window.location.pathname;
+                    // save all changes after leaving an editable
+                    Aloha.bind('aloha-editable-deactivated', function(){
+                        var content = Aloha.activeEditable.getContents();
+                        var contentId = Aloha.activeEditable.obj[0].id;
+                        var pageId = window.location.pathname;
+                        var project = jQuery("#project").val();
+                        var version = jQuery("#version").val();
 
-                    // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-                    if ( contentId.match(/-aloha$/gi) ) {
-                        contentId = contentId.replace( /-aloha/gi, '' );
-                    }
-                    console.log("saving aloha content");
-                    var request = jQuery.ajax({
-                        url: "save.php",
-                        type: "POST",
-                        data: {
-                            content : content,
-                            contentId : contentId,
-                            pageId : pageId
-                        },
-                        dataType: "html"
-                    });
+                        // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
+                        if ( contentId.match(/-aloha$/gi) ) {
+                            contentId = contentId.replace( /-aloha/gi, '' );
+                        }
+                        console.log("saving aloha content");
+                        console.log(content);
+                        console.log(project);
+                        console.log(version);
+                        var request = jQuery.ajax({
+                            url: "/notes/update",
+                            type: "POST",
+                            data: {
+                                content : content,
+                                contentId : contentId,
+                                pageId : pageId,
+                                project: project,
+                                version: version
+                            },
+                            dataType: "html"
+                        });
 
-                    request.done(function(msg) {
-                        jQuery("#log").html( msg ).show().delay(800).fadeOut();
-                    });
+                        request.done(function(msg) {
+                            jQuery("#log").html( msg ).show().delay(800).fadeOut();
+                        });
 
-                    request.error(function(jqXHR, textStatus) {
-                    alert( "Request failed: " + textStatus );
+                        request.error(function(jqXHR, textStatus) {
+                            alert( "Request failed: " + textStatus );
+                        });
                     });
-                    });
-
                 });
             });
 

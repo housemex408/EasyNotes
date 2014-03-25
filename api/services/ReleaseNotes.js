@@ -93,29 +93,51 @@ exports.getNotes = function (res, project, version) {
             }
         });
 
-        return res.view({
-            stories: stories,
-            chores: chores,
-            bugs: bugs,
+        // To find by a criteria
+        Release.findOne({
+            project: project,
             version: version
-        })
+        }).done(function (err, release) {
+                var notes;
+                if (err) {
+                    logger.info("content not found");
+
+                } else {
+                    if (release != null || release != undefined) {
+                        logger.info("content found: ", release);
+                        notes = release.description;
+                    }
+                }
+
+                return res.view({
+                    stories: stories,
+                    chores: chores,
+                    bugs: bugs,
+                    version: version,
+                    project: project,
+                    content: notes
+                })
+            });
     });
 };
 
-exports.update = function (res, project, version, description) {
+
+exports.update = function (res, project, version, content, contentid, pageId) {
     var logger = LogLibrary.get();
 
     Release.create({
-        description: description,
+        description: content,
         project: project,
-        version: version
+        version: version,
+        contentid: contentid,
+        pageid: pageId
     }).done(function (err, release) {
-        if (err) {
-            return logger.error(err);
+            if (err) {
+                return logger.error(err);
 
-        } else {
-            logger.info("Release updated: ", release);
-            return res.json(release);
-        }
-    });
+            } else {
+                logger.info("Release updated: ", release);
+                return res.json(release);
+            }
+        });
 };

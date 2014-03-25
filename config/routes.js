@@ -65,7 +65,7 @@ module.exports.routes = {
         controller: 'ReleaseController',
         action: 'notes'
     },
-    '/projects/:project/:version/update': {
+    '/notes/update': {
         controller: 'ReleaseController',
         action: 'update'
     }
