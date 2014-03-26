@@ -18,17 +18,20 @@ block content
             ul.issues
                 for story in stories
                     li
+                        img(src=story.fields.issuetype.iconUrl)
                         a(href='http://jira/browse/' + story.key, target='new')= '[' + story.key + ']'
                         span= story.fields.summary
             h3 Chores
             ul.issues
                 for chore in chores
                     li
+                        img(src=chore.fields.issuetype.iconUrl)
                         a(href='http://jira/browse/' + chore.key, target='new')= '[' + chore.key + ']'
                         span= chore.fields.summary
             h3 Bugs
             ul.issues
                 for bug in bugs
                     li
+                        img(src=bug.fields.issuetype.iconUrl)
                         a(href='http://jira/browse/' + bug.key, target='new')= '[' + bug.key + ']'
                         span= bug.fields.summary
