@@ -75,24 +75,6 @@ exports.getNotes = function (res, project, version) {
         logger.info("entering ReleaseNotes.getNotes()");
         logger.debug(issues);
 
-        var stories = [];
-        var chores = [];
-        var bugs = [];
-
-        issues.forEach(function (issue) {
-            switch (issue.fields.issuetype.name) {
-                case 'Story':
-                    stories.push(issue);
-                    break;
-                case 'Chore':
-                    chores.push(issue);
-                    break;
-                case 'Bug':
-                    bugs.push(issue);
-                    break;
-            }
-        });
-
         // To find by a criteria
         Release.findOne({
             project: project,
@@ -110,9 +92,7 @@ exports.getNotes = function (res, project, version) {
                 }
 
                 return res.view({
-                    stories: stories,
-                    chores: chores,
-                    bugs: bugs,
+                    issues: issues,
                     version: version,
                     project: project,
                     content: notes
