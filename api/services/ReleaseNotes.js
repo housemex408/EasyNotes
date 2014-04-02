@@ -127,16 +127,14 @@ exports.update = function (res, project, version, content, contentid, pageId) {
     };
 
     var update = function (release, content) {
-        Release.update({
-            project: release.project, version: release.version
-        }, {
-            content: content
-        }, function (err, releases) {
+        release.content = content;
+
+        release.save(function(err, release) {
             if (err) {
                 return logger.error(err);
             } else {
-                logger.info("Release updated:", releases);
-                return res.json(releases[0]);
+                logger.info("Release updated:", release);
+                return res.json(release);
             }
         });
     }
