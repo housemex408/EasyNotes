@@ -42,15 +42,6 @@ module.exports.bootstrap = function (cb) {
 
     sails.config.app.logger = log;
 
-    var Client = require('node-rest-client').Client;
-    var auth = {user: sails.config.app.jiraUser, password: sails.config.app.jiraPwd};
-    var client = new Client(auth);
-    client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
-    client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
-    client.registerMethod("versions", "http://jira/rest/api/2/project/${project}/versions", "GET");
-
-    sails.config.app.restClient = client;
-
     // It's very important to trigger this callack method when you are finished
     // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
     cb();

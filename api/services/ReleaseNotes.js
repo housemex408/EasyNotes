@@ -2,13 +2,17 @@
  * Created by jalvarado on 3/12/14.
  */
 // ReleaseNotes.js - in api/services
+var Client = require('node-rest-client').Client;
+var auth = {user: "jalvarado", password: "Mam80samba"};
+var client = new Client(auth);
+client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
+client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
+client.registerMethod("versions", "http://jira/rest/api/2/project/${project}/versions", "GET");
 
 var LogLibrary = require('./Logger');
-var RestClient = require('./RestClient');
 
 exports.getProjects = function (res) {
     var logger = LogLibrary.get();
-    var client = RestClient.get();
     logger.info("entering ReleaseNotes.getProjects()");
 
     var args = {};
@@ -33,7 +37,6 @@ exports.getProjects = function (res) {
 };
 
 exports.getVersions = function (res, project) {
-    var client = RestClient.get();
     var args = {
         path: {'project': project}
     };
@@ -62,7 +65,6 @@ exports.getVersions = function (res, project) {
 
 exports.getNotes = function (res, project, version) {
     var logger = LogLibrary.get();
-    var client = RestClient.get();
 
     var args = {
         parameters: {
@@ -74,8 +76,9 @@ exports.getNotes = function (res, project, version) {
     client.methods.notes(args, function (data) {
         var issues = JSON.parse(data).issues;
         logger.info("entering ReleaseNotes.getNotes()");
-        //logger.debug(issues);
+        logger.debug(issues);
 
+        // To find by a criteria
         Release.findOne({
             project: project,
             version: version
@@ -88,7 +91,6 @@ exports.getNotes = function (res, project, version) {
                     if (release != null || release != undefined) {
                         logger.info("content found: ", release);
                         notes = release.content;
-                        logger.debug(notes);
                     }
                 }
 
@@ -105,7 +107,6 @@ exports.getNotes = function (res, project, version) {
 
 exports.update = function (res, project, version, content, contentid, pageId) {
     var logger = LogLibrary.get();
-    var client = RestClient.get();
 
     var create = function () {
         Release.create({
@@ -128,7 +129,7 @@ exports.update = function (res, project, version, content, contentid, pageId) {
     var update = function (release, content) {
         release.content = content;
 
-        release.save(function (err, release) {
+        release.save(function(err, release) {
             if (err) {
                 return logger.error(err);
             } else {

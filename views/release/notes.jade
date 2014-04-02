@@ -8,7 +8,7 @@ block content
         div.container
             div.starter-template
                 h2= version
-            div.editable!= content
+            div.editable= content
             input(type='hidden', id='project', value=project)
             input(type='hidden', id='version', value=version)
             h3 Release Items
