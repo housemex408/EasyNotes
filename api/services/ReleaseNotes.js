@@ -3,7 +3,8 @@
  */
 // ReleaseNotes.js - in api/services
 var Client = require('node-rest-client').Client;
-var client = new Client();
+var auth = {user: "jalvarado", password: "Mam80samba"};
+var client = new Client(auth);
 client.registerMethod("notes", "http://jira/rest/api/2/search", "GET");
 client.registerMethod("projects", "http://jira/rest/api/2/project", "GET");
 client.registerMethod("versions", "http://jira/rest/api/2/project/${project}/versions", "GET");
@@ -26,6 +27,8 @@ exports.getProjects = function (res) {
                 name: project.name
             });
         });
+
+        logger.debug(projects);
 
         return res.view({
             projects: results
@@ -87,7 +90,7 @@ exports.getNotes = function (res, project, version) {
                 } else {
                     if (release != null || release != undefined) {
                         logger.info("content found: ", release);
-                        notes = release.description;
+                        notes = release.content;
                     }
                 }
 
@@ -105,19 +108,49 @@ exports.getNotes = function (res, project, version) {
 exports.update = function (res, project, version, content, contentid, pageId) {
     var logger = LogLibrary.get();
 
-    Release.create({
-        description: content,
-        project: project,
-        version: version,
-        contentid: contentid,
-        pageid: pageId
-    }).done(function (err, release) {
+    var create = function () {
+        Release.create({
+            content: content,
+            project: project,
+            version: version,
+            contentid: contentid,
+            pageid: pageId
+        }).done(function (err, release) {
+                if (err) {
+                    return logger.error(err);
+
+                } else {
+                    logger.info("Release created: ", release);
+                    return res.json(release);
+                }
+            })
+    };
+
+    var update = function (release, content) {
+        Release.update({
+            project: release.project, version: release.version
+        }, {
+            content: content
+        }, function (err, releases) {
             if (err) {
                 return logger.error(err);
-
             } else {
-                logger.info("Release updated: ", release);
-                return res.json(release);
+                logger.info("Release updated:", releases);
+                return res.json(releases[0]);
             }
         });
+    }
+
+    Release.find()
+        .where({ project: project, version: version})
+        .exec(function (err, releases) {
+            if (releases.length > 0) {
+                var release = releases[0];
+                update(release, content);
+            }
+            else {
+                create();
+            }
+        });
+
 };
