@@ -53,19 +53,23 @@ module.exports.routes = {
      */
 
     // Alternatively, you can use the more verbose syntax:
-    '/projects': {
+    '/': {
+        controller: 'ReleaseController',
+        action: 'home'
+    },
+    '/api/projects': {
         controller: 'ReleaseController',
         action: 'projects'
     },
-    '/projects/:project': {
+    '/api/:project/versions': {
         controller: 'ReleaseController',
         action: 'versions'
     },
-    '/projects/:project/:version': {
+    '/api/:project/:version': {
         controller: 'ReleaseController',
         action: 'notes'
     },
-    '/notes/update': {
+    '/api/:project/:version/update': {
         controller: 'ReleaseController',
         action: 'update'
     }

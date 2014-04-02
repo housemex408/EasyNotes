@@ -1,0 +1,9 @@
+<div class="starter-template">
+    <h2>{{project}} Versions</h2>
+</div>
+<ul class="issues">
+    <li ng-repeat="version in versions">
+        <a href="/notes?project={{project}}&version={{version.name}}">[{{version.name}}]</a>
+        <span>{{version.description}}</span>
+    </li>
+</ul>

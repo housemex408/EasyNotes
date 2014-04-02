@@ -4,71 +4,33 @@ html(lang="en")
         title= title
         link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
         link(rel='stylesheet', href='/styles/app.css')
-        //script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js')
-        //script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular-route.min.js')
-        //script(type='text/javascript', src='/SPA/spa.js')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
 
     body
-        block content
-        script(type='text/javascript', src='/js/socket.io.js')
-        script(type='text/javascript', src='/js/sails.io.js')
-        script(type='text/javascript', src='/js/app.js')
-        script(type='text/javascript', src='/js/jquery/dist/jquery.min.js')
-        script(type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
-        script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/require.js')
-        script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/vendor/jquery-1.7.2.js')
-        //http://aloha-editor.org/guides/plugins.html
-        script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/aloha.js', data-aloha-plugins='common/ui,common/format,common/list,common/link,common/highlighteditables')
-        link(rel='stylesheet', href='http://cdn.aloha-editor.org/latest/css/aloha.css')
-        script(type='text/javascript').
-            Aloha = window.Aloha || {};
-            Aloha.settings = Aloha.settings || {};
-            // Restore the global $ and jQuery variables of your project's jQuery
-            Aloha.settings.jQuery = window.jQuery.noConflict(true);
-            Aloha.ready( function() {
-                var $ = Aloha.jQuery;
-                $('.editable').aloha();
+        div(class='navbar navbar-inverse navbar-fixed-top', role='navigation')
+            div.container
+                div.navbar-header
+        div.jumbotron
 
-                Aloha.require( ['aloha', 'aloha/jquery'], function( Aloha, jQuery) {
+            block content
+            script(type='text/javascript', src='/js/socket.io.js')
+            script(type='text/javascript', src='/js/sails.io.js')
+            script(type='text/javascript', src='/js/app.js')
+            script(type='text/javascript', src='/js/jquery/dist/jquery.min.js')
+            script(type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
+            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/require.js')
+            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/vendor/jquery-1.7.2.js')
 
-                    // save all changes after leaving an editable
-                    Aloha.bind('aloha-editable-deactivated', function(){
-                        var content = Aloha.activeEditable.getContents();
-                        var contentId = Aloha.activeEditable.obj[0].id;
-                        var pageId = window.location.pathname;
-                        var project = jQuery("#project").val();
-                        var version = jQuery("#version").val();
-
-                        // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-                        if ( contentId.match(/-aloha$/gi) ) {
-                            contentId = contentId.replace( /-aloha/gi, '' );
-                        }
-                        console.log("saving aloha content");
-                        console.log(content);
-                        console.log(project);
-                        console.log(version);
-                        var request = jQuery.ajax({
-                            url: "/notes/update",
-                            type: "POST",
-                            data: {
-                                content : content,
-                                contentId : contentId,
-                                pageId : pageId,
-                                project: project,
-                                version: version
-                            },
-                            dataType: "html"
-                        });
-
-                        request.done(function(msg) {
-                            jQuery("#log").html( msg ).show().delay(800).fadeOut();
-                        });
-
-                        request.error(function(jqXHR, textStatus) {
-                            alert( "Request failed: " + textStatus );
-                        });
-                    });
+            //http://aloha-editor.org/guides/plugins.html
+            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/aloha.js', data-aloha-plugins='common/ui,common/format,common/list,common/link,common/highlighteditables')
+            link(rel='stylesheet', href='http://cdn.aloha-editor.org/latest/css/aloha.css')
+            script(type='text/javascript').
+                Aloha = window.Aloha || {};
+                Aloha.settings = Aloha.settings || {};
+                // Restore the global $ and jQuery variables of your project's jQuery
+                Aloha.settings.jQuery = window.jQuery.noConflict(true);
+                Aloha.ready( function() {
+                    var $ = Aloha.jQuery;
+                    $('.editable').aloha();
                 });
-            });
 

@@ -12,11 +12,10 @@ var eazyNotes = angular.module('EazyNotes', ['ngRoute'])
             when('/', {
                 templateUrl: 'spa/pages/projects.html',
                 controller: 'ProjectsController'
-            })
-            /*when('/', {
-                templateUrl: 'spa/pages/home.html',
-                controller: 'HomeController'
-            });*/
+            }).
+            otherwise({
+                redirectTo: '/'
+            });
         $locationProvider.html5Mode(true);
     }]);
 
@@ -86,7 +85,7 @@ eazyNotes.controller("VersionsController", function ($scope, EasyNotesService, $
     });
 });
 
-eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $location, $routeParams) {
+eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $location, $routeParams, $sce) {
     console.log("inside notes controller!");
     $scope.project = $routeParams.project;
     $scope.version = $routeParams.version;
@@ -94,18 +93,8 @@ eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $loc
     EasyNotesService.getNotes($scope.project, $scope.version, function(data)
     {
         console.log("retrieving notes...");
-        //console.log(data.versions);
-        //console.log($scope.project);
-        $scope.stories =  data.stories;
-        $scope.chores =  data.chores;
-        $scope.bugs =  data.bugs;
+        console.log(data.issues);
+        $scope.issues =  data.issues;
+        $scope.content = $sce.trustAsHtml(data.content);
     });
-});
-
-eazyNotes.controller("UpdateController", function ($scope, EasyNotesService, $location, $routeParams) {
-    console.log("inside update controller!");
-    $scope.updateNotes = function()
-    {
-        console.log("updating notes!: " + $scope.notes);
-    }
 });

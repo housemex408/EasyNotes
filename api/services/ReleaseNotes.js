@@ -26,7 +26,7 @@ exports.getProjects = function (res) {
 
         logger.debug(projects);
 
-        return res.view({
+        return res.json({
             projects: results
         })
     });
@@ -52,7 +52,7 @@ exports.getVersions = function (res, project) {
             }
         });
 
-        return res.view({
+        return res.json({
             versions: results,
             project: project
         })
@@ -92,7 +92,7 @@ exports.getNotes = function (res, project, version) {
                     }
                 }
 
-                return res.view({
+                return res.json({
                     issues: issues,
                     version: version,
                     project: project,

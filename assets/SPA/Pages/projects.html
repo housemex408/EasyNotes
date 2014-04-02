@@ -1,0 +1,9 @@
+<div class="starter-template">
+    <h2>Move Projects & Products</h2>
+</div>
+<ul class="issues">
+    <li ng-repeat="project in projects">
+        <a href="/versions?project={{project.key}}">[{{project.key}}]</a>
+        <span>{{project.name}}</span>
+    </li>
+</ul>
