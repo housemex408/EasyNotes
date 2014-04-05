@@ -3,7 +3,7 @@
 </div>
 <ul class="issues">
     <li ng-repeat="project in projects">
-        <a href="/versions?project={{project.key}}">[{{project.key}}]</a>
+        <a href="/{{project.key}}">[{{project.key}}]</a>
         <span>{{project.name}}</span>
     </li>
 </ul>

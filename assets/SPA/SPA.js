@@ -1,23 +1,27 @@
 var eazyNotes = angular.module('EazyNotes', ['ngRoute'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider.
-            when('/notes', {
-                templateUrl: 'spa/pages/notes.html',
-                controller: 'NotesController'
-            }).
-            when('/versions', {
-                templateUrl: 'spa/pages/projectVersions.html',
-                controller: 'VersionsController'
-            }).
             when('/', {
                 templateUrl: 'spa/pages/projects.html',
                 controller: 'ProjectsController'
+            }).
+            when('/:project', {
+                templateUrl: 'spa/pages/versions.html',
+                controller: 'VersionsController'
+            }).
+            when('/:project/:version', {
+                templateUrl: 'spa/pages/notes.html',
+                controller: 'NotesController'
             }).
             otherwise({
                 redirectTo: '/'
             });
         $locationProvider.html5Mode(true);
     }]);
+
+//https://github.com/angular-ui/ui-router
+//https://egghead.io/lessons/angularjs-introduction-ui-router
+//https://github.com/angular-ui/ui-router/wiki/URL-Routing
 
 eazyNotes.factory('EasyNotesService', function ($http) {
     var EasyNotesService = function(data) {

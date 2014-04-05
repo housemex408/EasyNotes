@@ -3,7 +3,7 @@
 </div>
 <ul class="issues">
     <li ng-repeat="version in versions">
-        <a href="/notes?project={{project}}&version={{version.name}}">[{{version.name}}]</a>
+        <a href="/{{project}}/{{version.name}}">[{{version.name}}]</a>
         <span>{{version.description}}</span>
     </li>
 </ul>
