@@ -1,9 +1,10 @@
 <div class="starter-template">
-    <h2>{{project}} Versions</h2>
+    <h2>{{ project }} Versions</h2>
 </div>
+<input type="text" ng-model="search" class="form-control search" placeholder="Search versions..."/>
 <ul class="issues">
-    <li ng-repeat="version in versions">
-        <a href="#/{{project}}/{{version.name}}">[{{version.name}}]</a>
+    <li ng-repeat="version in versions | filter: search">
+        <a href="#/{{ project }}/{{ version.name }}">[{{ version.name }}]</a>
         <span>{{version.description}}</span>
     </li>
 </ul>

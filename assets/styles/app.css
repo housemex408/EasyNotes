@@ -1,9 +1,42 @@
-ul.issues li a
-{
+ul.issues li a {
     margin-right: 8px;
 }
 
-ul.issues li
-{
-  list-style: none;
+ul.issues li {
+    list-style: none;
+    margin-left: -3em;
+}
+
+input[type='text'].search {
+    width: 40%;
+    margin-bottom: 1em;
+}
+
+.indent {
+    margin-left: 3em;
+}
+
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    color: grey;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: grey;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: grey;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: grey;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: grey;
 }

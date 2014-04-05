@@ -1,13 +1,21 @@
 <div class="starter-template">
     <h2>{{ version }}</h2>
 </div>
-<div class="editable" ng-bind-html="content" editable>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Summary</h3>
+    </div>
+    <div class="panel-body">
+        <div contenteditable="true" placeholder="Add your summary here..." ng-bind-html="content" editable>
+        </div>
+    </div>
 </div>
 <input type="hidden" id="project" value="{{ project }}">
 <input type="hidden" id="version" value="{{ version }}">
 <h3>Issues</h3>
+<input type="text" ng-model="search" class="form-control search" placeholder="Search issues..."/>
 <ul class="issues">
-    <li ng-repeat="issue in issues">
+    <li ng-repeat="issue in issues | filter: search">
         <img src="{{ issue.fields.issuetype.iconUrl }}"/>
         <a href="http://jira/browse/{{ issue.key }}" target='new'>[{{ issue.key }}]</a>
         <span>{{ issue.fields.summary }}</span>
