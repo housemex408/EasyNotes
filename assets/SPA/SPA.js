@@ -1,22 +1,23 @@
-var eazyNotes = angular.module('EazyNotes', ['ngRoute'])
-    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        $routeProvider.
-            when('/', {
+var eazyNotes = angular.module('EazyNotes', ['ui.router'])
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('projects', {
+                url: '/',
                 templateUrl: 'spa/pages/projects.html',
                 controller: 'ProjectsController'
-            }).
-            when('/:project', {
+            })
+            .state('versions', {
+                url: '/:project',
                 templateUrl: 'spa/pages/versions.html',
                 controller: 'VersionsController'
-            }).
-            when('/:project/:version', {
+            })
+            .state('notes', {
+                url: '/:project/:version',
                 templateUrl: 'spa/pages/notes.html',
                 controller: 'NotesController'
-            }).
-            otherwise({
-                redirectTo: '/'
             });
-        $locationProvider.html5Mode(true);
+
+        $urlRouterProvider.otherwise('/');
     }]);
 
 //https://github.com/angular-ui/ui-router
@@ -55,17 +56,6 @@ eazyNotes.factory('EasyNotesService', function ($http) {
     return EasyNotesService;
 });
 
-eazyNotes.controller("HomeController", function ($scope, $location) {
-    console.log("inside home controller!");
-
-    $scope.title = "Welcome!"
-
-    $scope.ViewProjects = function () {
-
-        $location.path("/projects");
-    }
-});
-
 eazyNotes.controller("ProjectsController", function ($scope, EasyNotesService, $location) {
     console.log("inside projects controller!");
     $scope.projects = [];
@@ -77,9 +67,9 @@ eazyNotes.controller("ProjectsController", function ($scope, EasyNotesService, $
     });
 });
 
-eazyNotes.controller("VersionsController", function ($scope, EasyNotesService, $location, $routeParams) {
+eazyNotes.controller("VersionsController", function ($scope, EasyNotesService, $stateParams) {
     console.log("inside versions controller!");
-    $scope.project = $routeParams.project;
+    $scope.project = $stateParams.project;
     $scope.versions = [];
     EasyNotesService.getVersions($scope.project, function(data)
     {
@@ -89,15 +79,15 @@ eazyNotes.controller("VersionsController", function ($scope, EasyNotesService, $
     });
 });
 
-eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $location, $routeParams, $sce) {
+eazyNotes.controller("NotesController", function ($scope, EasyNotesService, $stateParams, $sce) {
     console.log("inside notes controller!");
-    $scope.project = $routeParams.project;
-    $scope.version = $routeParams.version;
+    $scope.project = $stateParams.project;
+    $scope.version = $stateParams.version;
     $scope.versions = [];
     EasyNotesService.getNotes($scope.project, $scope.version, function(data)
     {
         console.log("retrieving notes...");
-        console.log(data.issues);
+        //console.log(data.issues);
         $scope.issues =  data.issues;
         $scope.content = $sce.trustAsHtml(data.content);
     });
