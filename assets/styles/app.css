@@ -16,9 +16,29 @@ input[type='text'].search {
     margin-left: 3em;
 }
 
+.navbar-header
+{
+    margin-left: -6em !important;
+}
+
+.jumbotron
+{
+    margin-top: 3em;
+}
+
 [contenteditable=true]:empty:before {
     content: attr(placeholder);
     color: grey;
+}
+
+.logo
+{
+    background: url('../images/logo.png') no-repeat;
+    display: inline-block;
+    padding-left: 296px;
+    height: 76px;
+    line-height: 1.5em;
+    /*http://www1.flamingtext.com/net-fu/jobs/182304510.html?use=personal*/
 }
 
 ::-webkit-input-placeholder {
