@@ -12,8 +12,15 @@ html(lang="en")
             div.container
                 div.navbar-header
                     div.logo
+                div.masthead
+                    ul(class='nav nav-pills pull-right')
+                        li.active
+                            a(href='#') Home
+                        li
+                            a(href='#') About
+                        li
+                            a(href='#') Contact
         div.jumbotron
-
             block content
             script(type='text/javascript', src='/js/socket.io.js')
             script(type='text/javascript', src='/js/sails.io.js')
