@@ -1,5 +1,5 @@
 doctype
-html(lang="en")
+html(lang="en", ng-app="EazyNotes")
     head
         title= title
         //link(rel='stylesheet', href='/styles/reset.css')
@@ -13,7 +13,7 @@ html(lang="en")
                 div.navbar-header
                     div.logo
                 div.masthead
-                    ul(class='nav nav-pills pull-right')
+                    ul(class='nav nav-pills pull-right', navbuttons)
                         li.active
                             a(href='#') Home
                         li
@@ -36,6 +36,6 @@ html(lang="en")
             script.
                 Aloha = window.Aloha || {};
                 Aloha.settings = Aloha.settings || {};
-                Aloha.settings.jQuery = window.jQuery.noConflict(true);
+                //Aloha.settings.jQuery = window.jQuery.noConflict(true);
 
 

@@ -154,3 +154,20 @@ eazyNotes.directive("editable", function () {
 
     return config;
 });
+
+eazyNotes.directive("navbuttons", function () {
+    var config = {
+        replace: true,
+        transclude: false,
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            $(element).children().click(function (){
+                var curSelected = $(element).find(".active");
+                $(curSelected).removeClass("active");
+                $(this).addClass("active");
+            });
+        }
+    };
+
+    return config;
+});
