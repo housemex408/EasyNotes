@@ -5,24 +5,38 @@ This angular.js app is using angular ui.router module.  You can find documentati
  https://egghead.io/lessons/angularjs-introduction-ui-router
  https://github.com/angular-ui/ui-router/wiki/URL-Routing
  */
-
-var eazyNotes = angular.module('EazyNotes', ['ui.router'])
+'use strict'
+var eazyNotes = angular.module('EazyNotes', ['ui.router.state','ncy-angular-breadcrumb'])
+    .config(function($breadcrumbProvider) {
+        $breadcrumbProvider.setOptions({
+          template: 'bootstrap3'
+        });
+    })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('projects', {
                 url: '/',
                 templateUrl: 'spa/pages/projects.html',
-                controller: 'ProjectsController'
+                controller: 'ProjectsController',
+                data: {
+                    ncyBreadcrumbLabel: 'Home'
+                }
             })
             .state('versions', {
                 url: '/:project',
                 templateUrl: 'spa/pages/versions.html',
-                controller: 'VersionsController'
+                controller: 'VersionsController',
+                data: {
+                    ncyBreadcrumbLabel: '{{project}}'
+                }
             })
             .state('notes', {
                 url: '/:project/:version',
                 templateUrl: 'spa/pages/notes.html',
-                controller: 'NotesController'
+                controller: 'NotesController',
+                data: {
+                    ncyBreadcrumbLabel: '{{version}}'
+                }
             });
 
         $urlRouterProvider.otherwise('/');

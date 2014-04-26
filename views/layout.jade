@@ -21,21 +21,28 @@ html(lang="en", ng-app="EazyNotes")
                         li
                             a(href='#') Contact
         div.jumbotron
-            block content
+            script(type='text/javascript', src='/js/underscore.js')
+            script(type='text/javascript', src='/js/angular.min.js')
+            script(type='text/javascript', src='/js/angular-ui-router.js')
+            script(type='text/javascript', src='/js/angular-breadcrumb.js')
+            script(type='text/javascript', src='/SPA/spa.js')
+            div.indent
+                div(ncy-breadcrumb)
+                ui-view
             script(type='text/javascript', src='/js/socket.io.js')
             script(type='text/javascript', src='/js/sails.io.js')
             script(type='text/javascript', src='/js/app.js')
             script(type='text/javascript', src='/js/jquery/dist/jquery.min.js')
             script(type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
-            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/require.js')
-            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/vendor/jquery-1.7.2.js')
+            script(type='text/javascript', src='/js/aloha/require.js')
+            script(type='text/javascript', src='/js/aloha/vendor/jquery-1.7.2.js')
 
             //http://aloha-editor.org/guides/plugins.html
-            script(type='text/javascript', src='http://cdn.aloha-editor.org/latest/lib/aloha.js', data-aloha-plugins='common/ui,common/format,common/list,common/link,common/highlighteditables')
-            link(rel='stylesheet', href='http://cdn.aloha-editor.org/latest/css/aloha.css')
+            script(type='text/javascript', src='/js/aloha/aloha.js', data-aloha-plugins='common/ui,common/format,common/list,common/link,common/highlighteditables')
+            link(rel='stylesheet', href='/styles/aloha/aloha.css')
             script.
                 Aloha = window.Aloha || {};
                 Aloha.settings = Aloha.settings || {};
-                //Aloha.settings.jQuery = window.jQuery.noConflict(true);
+                Aloha.settings.jQuery = window.jQuery.noConflict(true);
 
 
