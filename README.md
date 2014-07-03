@@ -15,7 +15,7 @@
 9. brew install mongo
 10. npm install
 11. mongod
-12. sails app.js
+12. sails lift app.js
 13. grunt copy:dev
 
 **Now open up a browser and type "http://localhost:1337/".  You should see the EasyNotes application!**
