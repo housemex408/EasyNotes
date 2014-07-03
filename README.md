@@ -5,7 +5,7 @@
 
 *The following commands are all done on the terminal window*
 
-1. git clone git@github.com:housemex408/SailsProject.git
+1. git clone git@github.com:housemex408/EasyNotes.git
 2. cd EasyNotes
 3. npm install
 4. touch config/local.js | echo "module.exports = { app : { jiraUser: '*jira user name*', jiraPwd: '*jira password*' } }"
