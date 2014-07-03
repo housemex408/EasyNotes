@@ -15,7 +15,8 @@
     "mkdirp": "0.3.5",
     "sails-mongo": "0.9.7",
     "q": "^1.0.1",
-    "html-entities": "^1.0.10"
+    "html-entities": "^1.0.10",
+      "nodetime": "0.8.15"
   },
   "scripts": {
     "start": "node app.js",
