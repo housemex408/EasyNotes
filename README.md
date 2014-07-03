@@ -1,8 +1,8 @@
 ##EasyNotes - Making Release Notes Easy
 
-###This application was built using the Sails.js framework.  To learn more, go to http://sailsjs.org/
+####This application was built using the Sails.js framework.  To learn more, go to http://sailsjs.org/
 
-###Welcome to EasyNotes.  To get this project up and running, do the following
+####Welcome to EasyNotes.  To get this project up and running, do the following
 
 *The following commands are all done on the terminal window*
 
