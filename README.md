@@ -17,3 +17,5 @@
 9. sails app.js
 
 **Now open up a browser and type "http://localhost:1337/".  You should see the EasyNotes application!**
+
+*Note: if you make a change to any file under /assets directory, please run command "grunt copy:dev" in terminal window to deploy changes to public folder
