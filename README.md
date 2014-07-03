@@ -9,7 +9,7 @@
 1. git clone git@github.com:housemex408/SailsProject.git
 2. cd EasyNotes
 3. npm install
-4. touch config/local.js | echo "module.exports = { app : { jiraUser: '<enter user name here>', jiraPwd: '<enter password here>' } }"
+4. touch config/local.js | echo "module.exports = { app : { jiraUser: '*jira user name*', jiraPwd: '*jira password*' } }"
 5. ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 6. brew update
 7. brew install mongo
