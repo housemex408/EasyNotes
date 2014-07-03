@@ -1,4 +1,4 @@
-##EasyNotes - An app that pulls release note information from JIRA
+##EasyNotes - Making Release Notes Easy
 
 ###This application was built using the Sails.js framework.  To learn more, go to http://sailsjs.org/
 
