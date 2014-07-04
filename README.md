@@ -7,7 +7,7 @@
 
 1. git clone git@github.com:housemex408/EasyNotes.git (or git clone https://github.com/housemex408/EasyNotes.git)
 2. cd EasyNotes
-4. touch config/local.js | echo "module.exports = { app : { jiraUser: '*jira user name*', jiraPwd: '*jira password*' } }"
+4. touch config/local.js | echo "module.exports = { app : { jiraUser: '*jira user name*', jiraPwd: '*jira password*', logDir: '/Users/jalvarado/Documents/NodeApps/Logs', } }"
 5. ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 6. brew update
 7. brew install npm
